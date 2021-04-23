@@ -72,7 +72,9 @@ class Calcul {
         calculText = ""
     }
     func divideZero(left: Int, right: Int,_operator: String){
-        
+        if _operator == "/" && right == 0 {
+            displayAlert?("Démarrer un nouveau calcul!")
+        }
     }
     
     // operator
@@ -112,10 +114,12 @@ class Calcul {
             let result: String
             if operand == "x"{
                 result = Float(leftSide*rightSide).cleanValue
-                
             } else {
+                divideZero(left: Int(leftSide), right: Int(rightSide), _operator: "/")
                 result = Float(leftSide/rightSide).cleanValue
+                
             }
+            
             operationToReduce[operandIndex] = result
             operationToReduce.remove(at: operandIndex-1)
             operationToReduce.remove(at: operandIndex)
