@@ -109,39 +109,87 @@ class CalculTestCase: XCTestCase {
     // erreur test avec deux operateur en meme temps
     
     func testGivenAdditionOperator_WhenScreenDisplayError_ThenScreenDislayError() {
+        let exp = expectation(description: #function)
+        
+        calculator.displayAlert = { errorText in
+            XCTAssertTrue("Un operateur est déja mis !" == errorText)
+            exp.fulfill()
+        }
+        
         calculator.addNumber(number: "2")
         calculator.addOperator(_operator: "+")
         calculator.addOperator(_operator: "+")
-        XCTAssertTrue(calculator.calculText == "")
+        
+        waitForExpectations(timeout: 5, handler: nil)
     }
     func testGivensoustractionOperator_WhenScreenDisplayError_ThenScreenDislayError() {
+        let exp = expectation(description: #function)
+        
+        calculator.displayAlert = { errorText in
+            XCTAssertTrue("Un operateur est déja mis !" == errorText)
+            exp.fulfill()
+        }
+        
         calculator.addNumber(number: "2")
         calculator.addOperator(_operator: "-")
         calculator.addOperator(_operator: "-")
-        XCTAssertTrue(calculator.calculText == "")
+        
+        waitForExpectations(timeout: 5, handler: nil)
     }
     func testGivenMultiplicateOperator_WhenScreenDisplayError_ThenScreenDislayError() {
+        let exp = expectation(description: #function)
+        
+        calculator.displayAlert = { errorText in
+            XCTAssertTrue("Un operateur est déja mis !" == errorText)
+            exp.fulfill()
+        }
+        
         calculator.addNumber(number: "2")
         calculator.addOperator(_operator: "x")
         calculator.addOperator(_operator: "x")
-        XCTAssertTrue(calculator.calculText == "")
+        
+        waitForExpectations(timeout: 5, handler: nil)
     }
     func testGivenDivideOperator_WhenScreenDisplayError_ThenScreenDislayError() {
+        let exp = expectation(description: #function)
+        
+        calculator.displayAlert = { errorText in
+            XCTAssertTrue("Un operateur est déja mis !" == errorText)
+            exp.fulfill()
+        }
+        
         calculator.addNumber(number: "2")
         calculator.addOperator(_operator: "/")
         calculator.addOperator(_operator: "/")
-        XCTAssertTrue(calculator.calculText == "")
+        
+        waitForExpectations(timeout: 5, handler: nil)
     }
     // erreur demarrer un nouveau calcul
     
     func testGivenDivision10By0_WhenCalculIsAsked_ThenScreenReturnError() {
+        let exp = expectation(description: #function)
+        
+        calculator.displayAlert = { errorText in
+            XCTAssertTrue("Démarrer un nouveau calcul !" == errorText)
+            exp.fulfill()
+        }
+        
         calculator.addNumber(number: "2")
         calculator.addOperator(_operator: "/")
         calculator.addNumber(number: "0")
-        XCTAssertTrue(calculator.calculText == "")
+        calculator.equalOperator()
+        
+        waitForExpectations(timeout: 5, handler: nil)
     }
     func testGivenEqual_whenScreenDsiplayError_ThenScreenDisplayError() {
-        calculator.addOperator(_operator: "=")
-        XCTAssertTrue(calculator.calculText == "")
+        let exp = expectation(description: #function)
+        
+        calculator.displayAlert = { errorText in
+            XCTAssertTrue("Démarrer un calcul !" == errorText)
+            exp.fulfill()
+        }
+        calculator.equalOperator()
+        
+        waitForExpectations(timeout: 5, handler: nil)
     }
 }

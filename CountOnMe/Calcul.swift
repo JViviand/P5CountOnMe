@@ -63,7 +63,7 @@ class Calcul {
         }
         
         guard expressionHaveEnoughElement else {
-            displayAlert?("Démarrez un nouveau calcul !")
+            displayAlert?("Démarrer un calcul !")
             return
         }
         operators()
@@ -73,14 +73,14 @@ class Calcul {
     }
     func divideZero(left: Int, right: Int,_operator: String){
         if _operator == "/" && right == 0 {
-            displayAlert?("Démarrer un nouveau calcul!")
+            displayAlert?("Démarrer un nouveau calcul !")
         }
     }
     
     // operator
     func operators() {
         // Create local copy of operations
-    var operationsToReduce = simplifyMath(expression: elements)
+    var operationsToReduce = operatorMultiDivide(expression: elements)
     
     // Iterate over operations while an operand still here
     while operationsToReduce.count > 1 {
@@ -102,7 +102,7 @@ class Calcul {
     
     calculText.append(" = \(operationsToReduce.first!)")
     }
-    func simplifyMath (expression: [String]) -> [String] {
+    func operatorMultiDivide (expression: [String]) -> [String] {
         var operationToReduce = expression
         while operationToReduce.firstIndex(of: "x") != nil || operationToReduce.firstIndex(of: "/") != nil {
             let operandIndex = operationToReduce.firstIndex(of: "x") ?? operationToReduce.firstIndex(of: "/")!
